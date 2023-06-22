@@ -8,7 +8,7 @@
 				uSlide 是在线的AI辅助制作幻灯片平台，借助AI技术节省用户制做 PPT 过程中冗杂、<br>耗时、无意义的操作，让用户打开网页就能做PPT，用户提供构思和素材，AI辅助生成内容。
 			</div>
 			<div class="btn-group">
-				<div>在线生成</div>
+				<div @click.stop="$router.push({name:'WorkStation'})">在线生成</div>
 				<div>导入文件</div>
 			</div>
 		</div>
@@ -16,6 +16,14 @@
 </template>
 
 <script>
+	export default {
+		components:{
+		},
+		data(){
+			return {
+			}
+		}
+	}
 </script>
 
 <style scoped>
@@ -61,7 +69,7 @@
 	}
 	.row .content .btn-group div:nth-child(1){
 		margin-right: 20px;
-		color: black;;
+		color: black;
 		background-color: white;
 	}
 </style>

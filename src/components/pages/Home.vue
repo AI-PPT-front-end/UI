@@ -9,16 +9,21 @@
 				<span>价格</span>
 				<span>关于</span>
 			</div>
-			<div class="btn">
+			<div class="btn" @click="navLogin">
 				<div>登录/注册</div>
 			</div>
 		</div>
-	  <div>
+	  <div @click="loginCard = true">
 			<Home0 :style="styles[0]" v-if="showing[0]"></Home0>
 			<Home1 :style="styles[1]" v-if="showing[1]"></Home1>
 		</div>
 		<div class="right-arr" @click="handleClick()">
 			<svg width="90" height="90" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 12L31 24L19 36" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+		</div>
+		<div class="mask" v-if="loginCard" @click="loginCard = !loginCard">
+			<div class="wrapper" @click.stop>
+				<LoginCard></LoginCard>
+			</div>
 		</div>
   </div>
 </template>
@@ -26,14 +31,17 @@
 <script>
 import Home0 from '../Home0.vue'
 import Home1 from '../Home1.vue'
+import LoginCard from '../LoginCard.vue'
 export default {
   name: 'Home',
 	components:{
 		Home0,
-		Home1
+		Home1,
+		LoginCard
 	},
 	data(){
 		return {
+			loginCard: false,
 			showingIndex: 0,
 			showing: [true, false],
 			styles:[
@@ -48,6 +56,9 @@ export default {
 			this.$set(this.showing, target, true)
 			this.$set(this.showing, this.showingIndex, false)
 			this.showingIndex = target
+		},
+		navLogin(){
+			this.$router.push({name: 'Login'})
 		}
 	}
 }
@@ -172,5 +183,27 @@ export default {
 		animation: arr 3s linear infinite;
 		cursor: pointer;
 		border-radius: 50%;
+	}
+	.mask{
+		width: 100%;
+		height: 100vh;
+		background-color: #00000050;
+		position: fixed;
+		z-index: 999;
+		left: 0;
+		top: 0;
+	}
+	.mask .wrapper{
+		background-color: #F2F2F2;
+		padding: 10px 30px;
+		border-radius: 12px;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		margin: auto;
+		width: 450px;
+		height: 740px;
 	}
 </style>
